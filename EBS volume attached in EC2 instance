@@ -1,0 +1,9 @@
+Create Volume
+Attach to EC2 instance
+$ lsblk --we can view that volume in server after that we need to format the volume
+$ mkfs.ext4 /dev/xvdf
+Create directory and mount the volume to that directory 
+$ mount /dev/xvdf /newdirectoryname
+$ df -h
+to attach the volume 
+umount directoryname
