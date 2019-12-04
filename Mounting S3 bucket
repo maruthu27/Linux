@@ -1,0 +1,47 @@
+Create IAM User:
+
+	1. Need to create a IAM user **demo user**
+	2. Access type: choose programmatic access
+	3. S3 full access
+	4. Create user then will show access key id and secret key id (save this)
+	5. Note the access key and secret access key
+
+Configure System:
+
+	1. Install the s3fs 
+
+		$ sudo apt-get install s3fs --- this is for ubuntu System only
+
+	2. Create a credential file to store the access key and secret access key.
+ 
+		format:-- access key:secret key
+
+	3. Change the permission for the file
+
+		 $ chmod 600 filename
+
+	4. Create a directory and mount the s3 bucket 
+
+		$ sudo s3fs <bucketname>  /Path/to/<folder name> -o passwd_file=<credential file>
+
+                $  sudo s3fs maruthu /home/ubuntu/dd -o passwd_file=pawwd -o uid=1001,gid=1001,allow_other
+
+
+*****older fuse package removing***
+#yum remove fuse fuse-s3fs
+#yum clean all
+#s3fs bucketname /s3bucket -o passwd_file=/root/.passwd.s3fs
+
+ 330  sudo apt-get install s3fs
+  331  touch passwd
+  332  clear
+  333  vi passwd
+  334  chmod 600 passwd
+  335  mkdir singh
+  336  sudo s3fs maruthu /home/ubuntu/singh
+  337  sudo s3fs maruthu /home/ubuntu/singh -o passwd_file=passwd
+  338  df -h
+  339  sudo mkdir singh/gggg
+
+********To unmount****************
+umount -l /home/ubuntu/directoryname
