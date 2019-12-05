@@ -1,0 +1,6 @@
+$ sudo apt-get remove nginx nginx-common
+$ sudo apt-get purge nginx nginx-common
+$ rm -rf /etc/nginx
+OR
+$ sudo apt-get purge nginx
+$ sudo apt-get autoremove
