@@ -1,0 +1,77 @@
+Instructions
+Its mandatory to stop instanceA where the root volume needs to be increased.
+
+Perform a snapshot of the root volume (wait for the snapshot progress bar to start showing some percentage).
+
+Create an t2.micro instanceB  with an AMZ AMI Linux in the same VPC and Subnet as the instance of the root volume to be increased.
+
+Attach the root volume from instanceA to instanceB (remember the device position of the original instance -- ex: /dev/sda1).
+
+Increase/modify the capacity of the root volume from instanceA using the AWS console.
+
+Log into instanceB, at the terminal type '$ lsblk' to check the devices on the OS (identify the root volume from instanceA).
+Verify if the capacity has changed:
+
+lsblk -f
+[ec2-user ~]$ lsblk
+NAME    MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+xvda    202:0    0   8G  0 disk
+└─xvda1 202:1    0   8G  0 part /
+xvdf    202:80   0  30G  0 disk
+└─xvdf1 202:81   0   8G  0 part
+
+
+Identify the name of what partition you need to increase:
+
+The volume /dev/xvdf has a partition, /dev/xvdf1. While the size of the volume is 30G, the size of the partition is still 8 GB and must be extended.
+
+
+Grow the partition /dev/xvdf1:
+
+[ec2-user ~]$ sudo growpart /dev/xvdf 1
+
+
+Verify using lsblk if the device capacity was increased:
+
+[ec2-user ~]$ lsblk
+NAME    MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+xvda    202:0    0  16G  0 disk
+└─xvda1 202:1    0  16G  0 part /
+xvdf    202:80   0  30G  0 disk
+└─xvdf1 202:81   0  30G  0 part
+
+
+Mount the device on /mnt:
+
+[ec2-user ~]$ mount /dev/xvdf1 /mnt
+
+
+Extend/grow the filesystem:
+
+[ec2-user ~]$ xfs_growfs /dev/xvdf1
+
+
+Verify if the filesystem increased:
+
+[ec2-user ~]$ df -h
+Filesystem       Size  Used Avail Use% Mounted on
+/dev/xvda1        16G  1.9G  6.2G  12% /
+/dev/xvdf1        30G   45M  8.0G   1% /mnt
+
+
+Unmount the device:
+
+[ec2-user ~]$ umount /mnt
+
+
+Detach the root volume using the AWS console.
+
+Finally attach the root volume to instanceA and start it.
+
+
+
+
+
+Related articles
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/modify-volume-requirements.html
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recognize-expanded-volume-linux.html
