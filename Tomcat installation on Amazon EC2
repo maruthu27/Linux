@@ -11,4 +11,23 @@ $ tar -xzvf https://www-us.apache.org/dist/tomcat/tomcat-8/v8.5.50/bin/apache-to
 
 under the tomcat folder go to
 $cd /bin
-$./start startup.sh
+$./startup.sh
+
+once above stepss done we can access our tomcat application by using
+<ip address>:8080
+
+Then to open " Manager App" we need to create user...under the tomcat folder we nee to open conf folder
+
+$cd/conf 
+$ vi tomcatuser.xml in this file wee need to add below things
+
+<role rolename="manager-gui"/>
+<role rolename="manager-script"/>
+<role rolename="manager-jmx"/>
+<role rolename="manager-status"/>
+<user username="admin" password="admin" roles="manager-gui, manager-script, manager-jmx, manager-status"/>
+<user username="deployer" password="deployer" roles="manager-script"/>
+<user username="tomcat" password="s3cret" roles="manager-gui"/>
+
+and wee nee to reboot the tomcat service
+
