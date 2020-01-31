@@ -2,6 +2,15 @@
 
 $ sudo yum install java-1.8.0-openjdk
 
+need to set the path for java
+
+one way
+find /usr/lib/jvm/java-1.x.x-openjdk
+vim /etc/profile----this is for all the user....bash profile for one user
+export JAVA_HOME="path that you found"
+export PATH=$JAVA_HOME/bin:$PATH
+source /etc/profile to apply
+
 Then we need to download the tomcat in opt 
 $cd /opt
 
