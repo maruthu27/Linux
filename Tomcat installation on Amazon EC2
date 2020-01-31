@@ -4,6 +4,15 @@ $ sudo yum install java-1.8.0-openjdk
 
 need to set the path for java
 
+another way
+java -version
+find /usr/lib/jvm/java-1.8* | head -n 3
+#JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64
+export JAVA_HOME
+PATH=$PATH:$JAVA_HOME
+# To set it permanently update your .bash_profile
+source ~/.bash_profile
+
 one way
 find /usr/lib/jvm/java-1.x.x-openjdk
 vim /etc/profile----this is for all the user....bash profile for one user
