@@ -35,6 +35,8 @@ $./startup.sh
 once above stepss done we can access our tomcat application by using
 <ip address>:8080
 
+we need to edit some configuration context.xml which are under webapp folder
+
 Then to open " Manager App" we need to create user...under the tomcat folder we nee to open conf folder
 
 $cd/conf 
