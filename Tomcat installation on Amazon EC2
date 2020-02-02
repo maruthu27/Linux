@@ -25,7 +25,8 @@ $cd /opt
 
 $wget https://www-us.apache.org/dist/tomcat/tomcat-8/v8.5.50/bin/apache-tomcat-8.5.50.tar.gz
 
-$ tar -xzvf https://www-us.apache.org/dist/tomcat/tomcat-8/v8.5.50/bin/apache-tomcat-8.5.50.tar.gz
+$ tar -xzvf apache-tomcat-8.5.50.tar.gz
+and change the name as tomcat
 
 under the tomcat folder go to
 $cd /bin
