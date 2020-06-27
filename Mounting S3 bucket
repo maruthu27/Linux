@@ -45,3 +45,6 @@ Configure System:
 
 ********To unmount****************
 umount -l /home/ubuntu/directoryname
+
+echo "unmount"
+echo "fusermount -u [directory]"
